@@ -1,14 +1,12 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {IPermissionCallable} from "../../../lib/smart-wallet-permissions/src/interfaces/IPermissionCallable.sol";
-import {UserOperationLib} from "../../../lib/smart-wallet-permissions/src/utils/UserOperationLib.sol";
+import {IPermissionContract} from "../../../lib/smart-wallet-permissions/src/interfaces/IPermissionContract.sol";
+import {UserOperation} from "../../../lib/smart-wallet-permissions/src/utils/UserOperationLib.sol";
 
 import {CounterAllowance} from "../logic/CounterAllowance.sol";
 
-contract PermissionCallableCounterAllowance is CounterAllowance, IPermissionCallable {
-    error InvalidInitializePermissionSender(address sender);
-
+contract PermissionCallableCounterAllowance is CounterAllowance, IPermissionContract {
     /// @notice Permission-specific values for this permission contract.
     struct PermissionValues {
         /// @dev Recurring native token allowance value (struct).

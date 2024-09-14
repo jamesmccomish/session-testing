@@ -3,4 +3,32 @@ src = "src"
 out = "out"
 libs = ["lib"]
 
+auto_detect_remappings = false
+remappings = [
+"@openzeppelin/contracts/=lib/smart-wallet-permissions/lib/openzeppelin-contracts/contracts/",
+"@openzeppelin/contracts/security/=lib/smart-wallet-permissions/lib/magic-spend/lib/openzeppelin-contracts/contracts/utils/",
+"FreshCryptoLib/=lib/smart-wallet-permissions/lib/webauthn-sol/lib/FreshCryptoLib/solidity/src/",
+"account-abstraction/=lib/smart-wallet-permissions/lib/account-abstraction/contracts/",
+"ds-test/=lib/smart-wallet-permissions/lib/webauthn-sol/lib/forge-std/lib/ds-test/src/",
+"erc4626-tests/=lib/smart-wallet-permissions/lib/openzeppelin-contracts/lib/erc4626-tests/",
+"forge-std/=lib/forge-std/src/",
+"fuzzlib/=lib/smart-wallet-permissions/lib/magic-spend/lib/fuzzlib/src/",
+"halmos-cheatcodes/=lib/smart-wallet-permissions/lib/openzeppelin-contracts/lib/halmos-cheatcodes/src/",
+"magic-spend/=lib/smart-wallet-permissions/lib/magic-spend/",
+"openzeppelin-contracts/=lib/smart-wallet-permissions/lib/openzeppelin-contracts/",
+"p256-verifier/=lib/smart-wallet-permissions/lib/smart-wallet/lib/p256-verifier/",
+"safe-singleton-deployer-sol/=lib/smart-wallet-permissions/lib/smart-wallet/lib/safe-singleton-deployer-sol/",
+"smart-wallet-permissions/=lib/smart-wallet-permissions/",
+"smart-wallet/=lib/smart-wallet-permissions/lib/smart-wallet/src/",
+"solady/=lib/smart-wallet-permissions/lib/solady/src/",
+"webauthn-sol/=lib/smart-wallet-permissions/lib/webauthn-sol/src/",
+"@openzeppelin/=lib/openzeppelin-contracts/",
+"@account-abstraction/=lib/account-abstraction/contracts/",
+"@forge-std/=lib/forge-std/src/",
+"@smart-wallet/=lib/smart-wallet/src/",
+"@webauthn-sol/=lib/webauthn-sol/src/",
+"@smart-wallet-permissions/=lib/smart-wallet-permissions/contracts/"
+]
+
+
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

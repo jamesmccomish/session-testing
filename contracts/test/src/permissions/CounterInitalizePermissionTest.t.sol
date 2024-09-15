@@ -7,15 +7,9 @@ import {
     PermissionCallableCounterAllowanceBase,
     CounterAllowance
 } from "../../base/PermissionCallableCounterAllowanceBase.sol";
-import {Counter} from "../../../src/Counter.sol";
 
 contract CounterInitalizePermissionTest is PermissionCallableCounterAllowanceBase {
-    Counter public counter;
-
     function setUp() public {
-        counter = new Counter();
-        counter.setNumber(0);
-
         _initializePermissionContract();
     }
 

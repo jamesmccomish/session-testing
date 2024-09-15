@@ -8,19 +8,20 @@ import {
   P256Credential
 } from "webauthn-p256";
 import { Hex, toFunctionSelector } from "viem";
+import { PERMISSIONED_COUNTER_CONTRACT_ADDRESS } from '../constants/PermissionedCounterContract';
 
 export const Permissions = () => {
-  const { address }= useAccount();
+  const { address } = useAccount();
   const { grantPermissionsAsync } = useGrantPermissions();
 
   const [permissionsContext, setPermissionsContext] = useState<
-  Hex | undefined
->();
-const [credential, setCredential] = useState<
-  undefined | P256Credential<"cryptokey">
->();
+    Hex | undefined
+  >();
+  const [credential, setCredential] = useState<
+    undefined | P256Credential<"cryptokey">
+  >();
 
- const grantPermissions = async (allowance: bigint, period: number) => {
+  const grantPermissions = async (allowance: bigint, period: number) => {
     if (address) {
       const newCredential = await createCredential({ type: "cryptoKey" });
       const response = await grantPermissionsAsync({
@@ -48,7 +49,7 @@ const [credential, setCredential] = useState<
               {
                 type: "allowed-contract-selector",
                 data: {
-                  contract: contractAddress,
+                  contract: PERMISSIONED_COUNTER_CONTRACT_ADDRESS,
                   selector: toFunctionSelector(
                     "permissionedCall(bytes calldata call)"
                   ),
@@ -66,7 +67,8 @@ const [credential, setCredential] = useState<
 
   return (
     <div>
-      <button onClick={() => grantPermissions(1000000000000000000, 10)}>Grant Permissions
+      {/* Grant persmission for 3 clicks over the next 30 seconds */}
+      <button onClick={() => grantPermissions(3n, 30)}>Grant Permissions
 
       </button>
     </div>

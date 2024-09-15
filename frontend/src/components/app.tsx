@@ -2,7 +2,7 @@ import '../App.css'
 
 import { useState } from 'react'
 import { useAccount, useConnect } from "wagmi";
-import { GrantPermissions } from "./permissions";
+import { GrantPermissions } from "./grant-permissions";
 
 import WalletComponent from "./wallet-component";
 

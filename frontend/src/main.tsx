@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-// import { Buffer } from "buffer";
+import { Buffer } from "buffer";
 import ReactDOM from "react-dom/client";
 import { WagmiProvider } from "wagmi";
 import "./index.css";
@@ -8,7 +8,7 @@ import { baseSepolia } from "viem/chains"
 import App from "./components/app.tsx";
 import { config } from "./config/wagmi.ts";
 
-// globalThis.Buffer = Buffer;
+globalThis.Buffer = Buffer;
 
 const queryClient = new QueryClient();
 

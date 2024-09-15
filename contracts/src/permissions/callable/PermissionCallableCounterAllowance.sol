@@ -52,9 +52,7 @@ contract PermissionCallableCounterAllowance is CounterAllowance, IPermissionCont
 
     /// @notice Validate the permission to execute a userOp.
     ///
-    /// @dev Offchain userOp construction should append useRecurringAllowance call to calls array if spending value.
-    /// @dev Recurring native token spend accounting does not protect against re-entrancy where an external call could
-    ///      trigger an authorized call back to the account to spend more ETH.
+    /// @dev Does not have access to certain storage values. Just checks selectors and addresses called are allowed
     ///
     /// @param permissionHash Hash of the permission.
     /// @param permissionValues Permission-specific values for this permission contract.

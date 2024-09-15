@@ -1,15 +1,13 @@
 import '../App.css'
 
 import { useState } from 'react'
-import { Hex, toFunctionSelector } from "viem";
 import { useAccount, useConnect } from "wagmi";
-import {
-  useGrantPermissions,
-} from "wagmi/experimental";
+import { GrantPermissions } from "./permissions";
 
 import WalletComponent from "./wallet-component";
 
 function App() {
+  // TODO replace with counter from contract
   const [count, setCount] = useState(0)
 
   const account = useAccount();
@@ -26,16 +24,10 @@ function App() {
       <h1>Base Session Key Example</h1>
       <div className="flex justify-end">
         {account.address ? (
-          <>
+          <div >
             <WalletComponent />
-            <button
-              onClick={login}
-              type="button"
-              className="bg-purple-500 text-white text-xl text-bold text-black px-4 py-2 rounded"
-            >
-              Grant Permissions
-            </button>
-          </>
+            <GrantPermissions />
+          </div>
         )
           :
           (

@@ -20,7 +20,7 @@ const WalletComponent: React.FC = () => {
   return (
     <Wallet>
       <ConnectWallet withWalletAggregator={true} text={"Wallet"} className="">
-        <Avatar className="h-6 w-6" />
+        {/* <Avatar className="h-6 w-6" /> */}
         <Name />
       </ConnectWallet>
       {/* <WalletDropdown>

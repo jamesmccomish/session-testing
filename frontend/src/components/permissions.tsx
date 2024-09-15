@@ -7,10 +7,10 @@ import {
   createCredential,
   P256Credential
 } from "webauthn-p256";
-import { Hex, toFunctionSelector } from "viem";
+import { Hex, parseEther, toFunctionSelector } from "viem";
 import { PERMISSIONED_COUNTER_CONTRACT_ADDRESS } from '../constants/PermissionedCounterContract';
 
-export const Permissions = () => {
+export const GrantPermissions = () => {
   const { address } = useAccount();
   const { grantPermissionsAsync } = useGrantPermissions();
 
@@ -22,46 +22,56 @@ export const Permissions = () => {
   >();
 
   const grantPermissions = async (allowance: bigint, period: number) => {
+    console.log("grantPermissions", { allowance, period });
     if (address) {
       const newCredential = await createCredential({ type: "cryptoKey" });
-      const response = await grantPermissionsAsync({
-        permissions: [
-          {
-            address: address,
-            chainId: 84532,
-            expiry: 17218875770,
-            signer: {
-              type: "key",
-              data: {
-                type: "secp256r1",
-                publicKey: newCredential.publicKey,
+      console.log("newCredential", { newCredential });
+      try {
+        const response = await grantPermissionsAsync({
+          permissions: [
+            {
+              address: address,
+              chainId: 84532,
+              expiry: 17218875770,
+              signer: {
+                type: "key",
+                data: {
+                  type: "secp256r1",
+                  publicKey: newCredential.publicKey,
+                },
               },
+              permissions: [
+                {
+                  type: "native-token-recurring-allowance",
+                  data: {
+                    allowance: parseEther('1'),
+                    start: Math.floor(Date.now() / 1000),
+                    period: 86400,
+                  },
+                },
+                {
+                  type: "allowed-contract-selector",
+                  data: {
+                    contract: PERMISSIONED_COUNTER_CONTRACT_ADDRESS,
+                    selector: '0x2bd1b86d'
+                    //  toFunctionSelector(
+                    //   "permissionedCall(bytes calldata call)"
+                    // ),
+                  },
+                },
+              ],
             },
-            permissions: [
-              {
-                type: "native-token-recurring-allowance",
-                data: {
-                  allowance: allowance,
-                  start: Math.floor(Date.now() / 1000),
-                  period: period,
-                },
-              },
-              {
-                type: "allowed-contract-selector",
-                data: {
-                  contract: PERMISSIONED_COUNTER_CONTRACT_ADDRESS,
-                  selector: toFunctionSelector(
-                    "permissionedCall(bytes calldata call)"
-                  ),
-                },
-              },
-            ],
-          },
-        ],
-      });
-      const context = response[0].context as Hex;
-      setPermissionsContext(context);
-      setCredential(newCredential);
+          ],
+        });
+        console.log({ response });
+        const context = response[0].context as Hex;
+        console.log({ context });
+        setPermissionsContext(context);
+        setCredential(newCredential);
+      } catch (error) {
+        console.error("Error granting permissions:", error);
+      }
+
     }
   };
 
